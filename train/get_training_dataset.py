@@ -23,10 +23,8 @@ def get_training_dataset(train_files: List[str], tokenizer, max_seq_length, qwen
     """ get training dataset with a specified seed """
     raw_datasets = load_raw_dataset(
         train_files, sample_size=sample_size, sample_percentage=sample_percentage, seed=seed)
-    # print("Cleaned up cached files:", raw_datasets.cleanup_cache_files())
     lm_datasets = encode_data(
         raw_datasets, tokenizer, max_seq_length, qwen=qwen)
-    # print("Cleaned up cached files:", lm_datasets.cleanup_cache_files())
     return lm_datasets
 
 
@@ -46,9 +44,6 @@ def load_raw_dataset(train_files: Union[List[str], str], sample_size=None, sampl
         else:
             dataset_size = sample_size
 
-        # if sample_size is None and sample_percentage == 1.0:
-        #     processed_dataset.append(processed_dataset)  # not shuffle
-        # else:
         with temp_seed(seed):
             index = np.random.permutation(len(processed_dataset))[:dataset_size]
 
@@ -78,7 +73,6 @@ def encode_data(raw_datasets, tokenizer, max_seq_length, qwen=False, processing_
         batched=False,
         num_proc=processing_num_workers,
         load_from_cache_file=not overwrite_cache,
-        # load_from_cache_file=False,
         desc="Tokenizing and reformatting instruction data",
     )
     lm_datasets.set_format(type="pt")

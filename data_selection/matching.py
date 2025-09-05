@@ -81,8 +81,6 @@ for target_task_name in args.target_task_names:
         elif args.method == 'L2':
             influence_score = influence_score.reshape(
                 influence_score.shape[0], N_SUBTASKS[target_task_name], -1).mean(-1).min(-1)[0]
-        # influence_score = influence_score.reshape(
-        #         influence_score.shape[0], N_SUBTASKS[target_task_name], -1).mean(-1)
         output_dir = os.path.join(args.output_path, f"{train_file_name}",  target_task_name)
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)

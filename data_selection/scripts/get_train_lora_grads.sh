@@ -1,6 +1,6 @@
 #!/bin/bash
 
-train_file=$1 #
+train_file=$1
 model=$2 # path to model
 output_path=$3 # path to output
 gpu_id=$4

@@ -592,9 +592,9 @@ def get_test_dataset(task, **kwargs):
         return get_tydiqa_dataset(**kwargs)
     elif task == "mmlu":
         return get_mmlu_dataset(**kwargs)
-    elif task.startswith('codex'):
+    elif task == 'humaneval':
         return get_codex_dataset(**kwargs)
-    elif task.startswith('gsm'):
+    elif task == 'gsm':
         return get_gsm_dataset(**kwargs)
     else:
         raise ValueError("Invalid task name")
